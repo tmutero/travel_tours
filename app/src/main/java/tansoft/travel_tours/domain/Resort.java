@@ -2,33 +2,38 @@ package tansoft.travel_tours.domain;
 
 public class Resort {
 
-
+    private int id;
     private String name;
     private  String serviceType;
-
     private Double longitude;
     private  Double latitude;
-
     private String city;
     private  String contact;
-
     private String amount;
-    private  int image;
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Resort() {
     }
 
-    public Resort(String name, String contact, String amount, int image, Double latitude, Double longitude) {
+    public Resort(String name, String contact, String serviceType, int id, Double latitude, Double longitude) {
         this.name = name;
         this.contact = contact;
-        this.amount = amount;
-        this.image = image;
+        this.serviceType = serviceType;
+        this.id = id;
         this.latitude=latitude;
         this.longitude=longitude;
     }
 
 
-    public Resort(String name, String serviceType, Double longitude, Double latitude, String city, String contact, String amount, int image) {
+    public Resort(String name, String serviceType, Double longitude, Double latitude, String city, String contact, String amount, int id) {
         this.name = name;
         this.serviceType = serviceType;
         this.longitude = longitude;
@@ -36,7 +41,7 @@ public class Resort {
         this.city = city;
         this.contact = contact;
         this.amount = amount;
-        this.image = image;
+        this.id = id;
     }
 
     public String getName() {
@@ -95,12 +100,5 @@ public class Resort {
         this.amount = amount;
     }
 
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
-    }
 
 }

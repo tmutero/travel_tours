@@ -1,11 +1,15 @@
 package tansoft.travel_tours.fragment;
 
 
+import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -32,11 +36,14 @@ import java.util.List;
 import java.util.Map;
 
 import tansoft.travel_tours.R;
+import tansoft.travel_tours.Utils.LocationTrack;
 import tansoft.travel_tours.adapter.ResortAdapter;
 import tansoft.travel_tours.config.AppConfig;
 import tansoft.travel_tours.config.AppController;
 import tansoft.travel_tours.domain.Resort;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static com.android.volley.VolleyLog.TAG;
 
 /**
@@ -53,7 +60,13 @@ public class SearchFragment extends  FragmentBase {
     List<Resort> resortList;
     RecyclerView rv;
 
+//Location Inputs
+    private ArrayList<String> permissionsToRequest;
+    private ArrayList<String> permissionsRejected = new ArrayList<>();
+    private ArrayList<String> permissions = new ArrayList<>();
 
+    private final static int ALL_PERMISSIONS_RESULT = 101;
+    LocationTrack locationTrack;
 
 
 
@@ -91,6 +104,10 @@ public class SearchFragment extends  FragmentBase {
         resortList = new ArrayList<>();
 
 
+
+
+
+
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,10 +120,39 @@ public class SearchFragment extends  FragmentBase {
                     InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(textSearchResort.getWindowToken(), 0);
 
-                    if (checkInternetConnectivity()) {
 
-                        getResorts(name, 0.0, 0.0);
+                    permissions.add(ACCESS_FINE_LOCATION);
+                    permissions.add(ACCESS_COARSE_LOCATION);
 
+                    permissionsToRequest = findUnAskedPermissions(permissions);
+                    //get the permissions we have asked for before but are not granted..
+                    //we will store this in a global list to access later.
+
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+
+                        if (permissionsToRequest.size() > 0)
+                            requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
+                    }
+
+
+                    locationTrack = new LocationTrack(getContext());
+
+
+
+
+                    if (locationTrack.canGetLocation()) {
+
+
+                        double longitude = locationTrack.getLongitude();
+                        double latitude = locationTrack.getLatitude();
+                        getResorts(name,latitude,longitude);
+                        Toast.makeText(getContext(), "Longitude:" + Double.toString(longitude) + "\nLatitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
+                    } else {
+
+
+                        getResorts(name,0.0,0.0);
 
                     }
 
@@ -147,9 +193,9 @@ public class SearchFragment extends  FragmentBase {
 
                         resortList.add(new Resort(
                                 resorts.getString("name"),
-                                resorts.getString("name"),
-                                resorts.getString( "name" ),
-                                resorts.getInt( "longitude" ),
+                                resorts.getString("contact"),
+                                resorts.getString( "serviceType" ),
+                                resorts.getInt( "id" ),
                                 resorts.getDouble("latitude"),
                                 resorts.getDouble("longitude")
 
@@ -209,6 +255,81 @@ public class SearchFragment extends  FragmentBase {
     private void hideDialog () {
         if (pDialog.isShowing())
             pDialog.dismiss();
+    }
+
+    private ArrayList<String> findUnAskedPermissions(ArrayList<String> wanted) {
+        ArrayList<String> result = new ArrayList<String>();
+
+        for (String perm : wanted) {
+            if (!hasPermission(perm)) {
+                result.add(perm);
+            }
+        }
+
+        return result;
+    }
+
+    private boolean hasPermission(String permission) {
+        if (canMakeSmores()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                return true;
+            }
+        }
+        return true;
+    }
+
+
+
+    private boolean canMakeSmores() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        switch (requestCode) {
+
+            case ALL_PERMISSIONS_RESULT:
+                for (String perms : permissionsToRequest) {
+                    if (!hasPermission(perms)) {
+                        permissionsRejected.add(perms);
+                    }
+                }
+
+                if (permissionsRejected.size() > 0) {
+
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (shouldShowRequestPermissionRationale(permissionsRejected.get(0))) {
+                            showMessageOKCancel("These permissions are mandatory for the application. Please allow access.",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                requestPermissions(permissionsRejected.toArray(new String[permissionsRejected.size()]), ALL_PERMISSIONS_RESULT);
+                                            }
+                                        }
+                                    });
+                            return;
+                        }
+                    }
+
+                }
+
+                break;
+        }
+
+    }
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(getActivity())
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
     }
 
 
