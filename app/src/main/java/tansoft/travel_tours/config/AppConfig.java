@@ -11,4 +11,8 @@ public class AppConfig {
 
 	public static String URL_RESORT_SEARCH = "http://192.168.20.184/travelTours/api/resort.php";
 
+
+
+	public static String URL_BOOKING = "http://192.168.20.184/travelTours/api/booking.php";
+
 }

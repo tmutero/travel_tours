@@ -1,22 +1,22 @@
 package tansoft.travel_tours.adapter;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 import tansoft.travel_tours.R;
-import tansoft.travel_tours.activity.ResortViewActivity;
 import tansoft.travel_tours.domain.Resort;
+import tansoft.travel_tours.fragment.ResortViewFragment;
 
 public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProductViewHolder>{
     private List<Resort> resortList;
@@ -51,14 +51,21 @@ public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProd
             public void onClick(View v) {
 
 
-                Intent i = new Intent(context, ResortViewActivity.class);
-                i.putExtra("resortName", resort.getName());
-                context.startActivity(i);
+
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
 
 
+                Bundle bundle = new Bundle();
+                bundle.putString("resortName", resort.getName());
+                bundle.putDouble("latitude", resort.getLatitude());
+                bundle.putDouble("longitude", resort.getLongitude());
+                bundle.putString("contact", resort.getContact());
+                bundle.putString("city", resort.getCity());
+                bundle.putString("serviceType", resort.getServiceType());
 
-                Toast.makeText(context, resort.getName() + " is selected", Toast.LENGTH_SHORT).show();
-
+                ResortViewFragment addProductFragment = new ResortViewFragment();
+                addProductFragment.setArguments(bundle);
+                activity.getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frag_container, addProductFragment).commit();
 
 //                Intent myIntent = new Intent(ResortAdapter.this, ResortViewFragment.class);
 //                myIntent.putExtra("resortName", resort.getAmount());

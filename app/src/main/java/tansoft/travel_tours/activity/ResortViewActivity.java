@@ -15,6 +15,8 @@ public class ResortViewActivity extends BaseActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        displayDrawer(); // Displays the toolbar and the drawer
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         System.out.println("----------------------" + resortName);
 
