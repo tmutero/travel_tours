@@ -105,7 +105,7 @@ public class ResortViewFragment extends Fragment {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                            //     city = input.getText().toString();
-                         //       taskLoadUp(city);
+                         //    taskLoadUp(city);
                             }
                         });
                 alertDialog.setNegativeButton("Cancel",

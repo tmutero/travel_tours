@@ -7,9 +7,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import tansoft.travel_tours.R;
+import tansoft.travel_tours.Utils.LocationTrack;
 import tansoft.travel_tours.fragment.DashboardFragment;
 import tansoft.travel_tours.services.SQLiteHandler;
 import tansoft.travel_tours.services.SessionManager;
@@ -20,6 +22,13 @@ public class MainActivity extends BaseActivity {
     private SQLiteHandler db;
     private SessionManager session;
     private TextView txtName;
+    private ArrayList<String> permissionsToRequest;
+    private ArrayList<String> permissionsRejected = new ArrayList<>();
+    private ArrayList<String> permissions = new ArrayList<>();
+
+    private final static int ALL_PERMISSIONS_RESULT = 101;
+    LocationTrack locationTrack;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
