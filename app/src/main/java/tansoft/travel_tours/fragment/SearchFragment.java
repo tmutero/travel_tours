@@ -60,7 +60,7 @@ public class SearchFragment extends  FragmentBase {
     List<Resort> resortList;
     RecyclerView rv;
 
-//Location Inputs
+
     private ArrayList<String> permissionsToRequest;
     private ArrayList<String> permissionsRejected = new ArrayList<>();
     private ArrayList<String> permissions = new ArrayList<>();
@@ -149,6 +149,7 @@ public class SearchFragment extends  FragmentBase {
                         double latitude = locationTrack.getLatitude();
                         getResorts(name,latitude,longitude);
                         Toast.makeText(getContext(), "Longitude:" + Double.toString(longitude) + "\nLatitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
+
                     } else {
 
 
@@ -197,7 +198,8 @@ public class SearchFragment extends  FragmentBase {
                                 resorts.getString( "serviceType" ),
                                 resorts.getInt( "id" ),
                                 resorts.getDouble("latitude"),
-                                resorts.getDouble("longitude")
+                                resorts.getDouble("longitude"),
+                                resorts.getString("imageString")
 
                         ));
 
@@ -225,8 +227,11 @@ public class SearchFragment extends  FragmentBase {
             @Override
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
+                HashMap<String, Double> params2 = new HashMap<>();
                 params.put("resortName", resortName);
+                params2.put("latitude", lat);
+                params2.put("longitude", lon);
 
 
                 return params;

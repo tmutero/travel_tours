@@ -19,11 +19,12 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import tansoft.travel_tours.R;
+import tansoft.travel_tours.config.AppConfig;
 
 
 public class ResortViewFragment extends Fragment {
 
-    private  String resortName, contactDetails,serviceType, city;
+    private  String resortName, contactDetails,serviceType, city,imageString;
     private Double longitude, latitude;
     ImageView productImage;
     TextView  companyName, phonenumber, emailaddress, physicaladdress,  payment_method;
@@ -45,9 +46,7 @@ public class ResortViewFragment extends Fragment {
         latitude=bundle.getDouble("latitude");
         longitude=bundle.getDouble("longitude");
         city=bundle.getString("city");
-
-
-
+        imageString=bundle.getString("imageString");
 
 
         productImage = root.findViewById(R.id.resort_image);
@@ -64,7 +63,7 @@ public class ResortViewFragment extends Fragment {
         physicaladdress.setText(serviceType);
 
         Glide.with(getActivity().getApplicationContext())
-                .load("http://192.168.20.184/travelTours/uploads/6.jpeg")
+                .load(AppConfig.URL_IMAGE+imageString)
                 .thumbnail(0.1f)
                 .into(productImage);
 

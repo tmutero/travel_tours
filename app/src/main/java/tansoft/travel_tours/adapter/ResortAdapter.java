@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import tansoft.travel_tours.R;
+import tansoft.travel_tours.config.AppConfig;
 import tansoft.travel_tours.domain.Resort;
 import tansoft.travel_tours.fragment.ResortViewFragment;
 
@@ -43,8 +44,10 @@ public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProd
         holder.resortService.setText(resortList.get(position).getServiceType());
 
         Glide.with(context)
-                .load("http://192.168.20.184/travelTours/uploads/"+resort.getId()+"png")
+                .load(AppConfig.URL_IMAGE+resort.getImageString())
                 .into(holder.imageResortImage);
+
+
 
         holder.imageResortImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +65,7 @@ public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProd
                 bundle.putString("contact", resort.getContact());
                 bundle.putString("city", resort.getCity());
                 bundle.putString("serviceType", resort.getServiceType());
+                bundle.putString("imageString",resort.getImageString());
 
                 ResortViewFragment addProductFragment = new ResortViewFragment();
                 addProductFragment.setArguments(bundle);

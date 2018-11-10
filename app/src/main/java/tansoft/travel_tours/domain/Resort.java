@@ -10,7 +10,15 @@ public class Resort {
     private String city;
     private  String contact;
     private String amount;
+    private String imageString;
 
+    public String getImageString() {
+        return imageString;
+    }
+
+    public void setImageString(String imageString) {
+        this.imageString = imageString;
+    }
 
     public int getId() {
         return id;
@@ -23,13 +31,14 @@ public class Resort {
     public Resort() {
     }
 
-    public Resort(String name, String contact, String serviceType, int id, Double latitude, Double longitude) {
+    public Resort(String name, String contact, String serviceType, int id, Double latitude, Double longitude,String imageString) {
         this.name = name;
         this.contact = contact;
         this.serviceType = serviceType;
         this.id = id;
         this.latitude=latitude;
         this.longitude=longitude;
+    this.imageString=imageString;
     }
 
 
