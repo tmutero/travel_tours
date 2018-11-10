@@ -1,5 +1,6 @@
 package tansoft.travel_tours.activity;
 
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import tansoft.travel_tours.R;
+import tansoft.travel_tours.activity.preference.SettingsActivity;
 import tansoft.travel_tours.fragment.BookingFragment;
 import tansoft.travel_tours.fragment.DashboardFragment;
 import tansoft.travel_tours.fragment.SearchFragment;
@@ -70,11 +72,9 @@ public class BaseActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-//            FragmentManager settingsFm = getSupportFragmentManager();
-//            FragmentTransaction ft = settingsFm.beginTransaction();
-////            ft.replace(R.id.frag_container, new SettingsFragment());
-//            ft.addToBackStack("SettingsFragment");
-//            ft.commit();
+            Intent intent= new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(intent);
+            finish();
 
 
         }

@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import tansoft.travel_tours.R;
+import tansoft.travel_tours.activity.preference.SettingsActivity;
 
 public class DashboardFragment extends Fragment {
     private View contentView;
@@ -39,6 +40,7 @@ public class DashboardFragment extends Fragment {
 
         contentView = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         booking = contentView.findViewById(R.id.booking);
 
@@ -60,6 +62,38 @@ public class DashboardFragment extends Fragment {
             ft.commit();
         }
     });
+
+        configure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getContext(), SettingsActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+        resort_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager settingsFm = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = settingsFm.beginTransaction();
+                ft.replace(R.id.frag_container, new SearchFragment());
+                ft.addToBackStack("SearchFragment");
+                ft.commit();
+            }
+        });
+
+        booking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager settingsFm = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = settingsFm.beginTransaction();
+                ft.replace(R.id.frag_container, new BookingFragment());
+                ft.addToBackStack("BookingFragment");
+                ft.commit();
+            }
+        });
+
 
 
 
