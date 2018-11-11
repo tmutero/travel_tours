@@ -25,7 +25,7 @@ public class DashboardFragment extends Fragment {
     private TextView weatherIcon;
     Typeface weatherFont;
 
-    ImageView booking,weather_icon,configure,resort_search;
+    ImageView booking, weather_icon, configure, resort_search;
 
     private Button preferences;
 
@@ -40,33 +40,26 @@ public class DashboardFragment extends Fragment {
 
         contentView = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-
         booking = contentView.findViewById(R.id.booking);
-
         weather_icon = contentView.findViewById(R.id.weather_icon);
-
         configure = contentView.findViewById(R.id.configure);
-
         resort_search = contentView.findViewById(R.id.resort_search);
 
-
-
-    weather_icon.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            FragmentManager settingsFm = getActivity().getSupportFragmentManager();
-            FragmentTransaction ft = settingsFm.beginTransaction();
-            ft.replace(R.id.frag_container, new WeatherFragment());
-            ft.addToBackStack("WeatherFragment");
-            ft.commit();
-        }
-    });
+        weather_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager settingsFm = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = settingsFm.beginTransaction();
+                ft.replace(R.id.frag_container, new WeatherFragment());
+                ft.addToBackStack("WeatherFragment");
+                ft.commit();
+            }
+        });
 
         configure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(getContext(), SettingsActivity.class);
+                Intent intent = new Intent(getContext(), SettingsActivity.class);
                 startActivity(intent);
 
 
@@ -95,15 +88,12 @@ public class DashboardFragment extends Fragment {
         });
 
 
-
-
         return contentView;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
 
     }

@@ -42,22 +42,17 @@ public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProd
         final Resort resort = resortList.get(position);
         holder.resortName.setText(resortList.get(position).getName());
         holder.resortService.setText(resortList.get(position).getServiceType());
+        holder.distance.setText(resortList.get(position).getDistance()+" :"+"KM from here.");
 
         Glide.with(context)
                 .load(AppConfig.URL_IMAGE+resort.getImageString())
                 .into(holder.imageResortImage);
 
-
-
         holder.imageResortImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
-
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
-
-
                 Bundle bundle = new Bundle();
                 bundle.putString("resortName", resort.getName());
                 bundle.putDouble("latitude", resort.getLatitude());
@@ -71,37 +66,6 @@ public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProd
                 addProductFragment.setArguments(bundle);
                 activity.getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frag_container, addProductFragment).commit();
 
-//                Intent myIntent = new Intent(ResortAdapter.this, ResortViewFragment.class);
-//                myIntent.putExtra("resortName", resort.getAmount());
-//                myIntent.putExtra("latitude", resort.getLatitude());
-//                context.startActivity(myIntent);
-
-//                Integer intent = new Intent(this, ResortViewActivity.this);
-//                intent.putExtra("YourValueIdentifier", YourAdapter[e.Position]);
-//
-//                context.startActivity(intent);
-
-
-
-//                Uri gmmIntentUri;
-//                if (resort.getLatitude() != null && resort.getLongitude() != null) {
-//                    gmmIntentUri = Uri.parse("geo:" + resort.getLatitude()
-//                            + "," + resort.getLongitude()
-//                            + "?q=" + resort.getLatitude()
-//                            + "," + resort.getLongitude()
-//                            + "(" + resort.getName() + " - " + resort.getServiceType() + ")");
-//                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-//                    mapIntent.setPackage("com.google.android.apps.maps");
-//                    context.startActivity(mapIntent);
-//
-//
-//
-//                } else {
-//                    gmmIntentUri = Uri.parse("geo:0,0?q=" + resort.getName());
-//                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-//                    mapIntent.setPackage("com.google.android.apps.maps");
-//                    //  startActivity(mapIntent);
-//                }
 
             }
         });
@@ -115,12 +79,13 @@ public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProd
     public class ResortProductViewHolder extends RecyclerView.ViewHolder {
         ImageView imageResortImage;
         TextView resortName;
-        TextView resortService;
+        TextView resortService, distance;
         public ResortProductViewHolder(View view) {
             super(view);
             imageResortImage=view.findViewById(R.id.thumbnail);
             resortName=view.findViewById(R.id.title);
             resortService = view.findViewById(R.id.desc);
+            distance=view.findViewById(R.id.distance);
 
         }
     }

@@ -3,10 +3,12 @@ package tansoft.travel_tours.fragment;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -50,6 +52,13 @@ public class WeatherFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_weather, container, false);
 
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        final String preferedCity=sharedPrefs.getString("city_list", "Not known to us");
+
+        System.out.println("======================================="+preferedCity+","+"ZW");
+
+
         loader = root.findViewById(R.id.loader);
         selectCity = root.findViewById(R.id.selectCity);
         cityField = root.findViewById(R.id.city_field);
@@ -62,7 +71,7 @@ public class WeatherFragment extends Fragment {
         weatherFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/weathericons-regular-webfont.ttf");
         weatherIcon.setTypeface(weatherFont);
 
-        taskLoadUp(city);
+        taskLoadUp(preferedCity+","+"ZW");
 
         selectCity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +79,7 @@ public class WeatherFragment extends Fragment {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
                 alertDialog.setTitle("Change City");
                 final EditText input = new EditText(getContext());
-                input.setText(city);
+                input.setText(preferedCity+"ZW");
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.MATCH_PARENT);

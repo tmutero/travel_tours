@@ -28,7 +28,7 @@
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_below="@id/thumbnail"
                 android:paddingLeft="@dimen/title_padding"
                 android:paddingRight="@dimen/title_padding"
@@ -39,22 +39,24 @@
             <TextView
                 android:id="@+id/desc"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_below="@id/title"
                 android:paddingBottom="@dimen/card_text_bottom2"
                 android:paddingLeft="@dimen/title_padding"
                 android:paddingRight="@dimen/title_padding"
                 android:textSize="@dimen/card_text2" />
 
-            <ImageView
-                android:id="@+id/overflow"
-                android:layout_width="@dimen/ic_overflow_width"
-                android:layout_height="@dimen/ic_overflow_height"
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:layout_alignParentRight="true"
-                android:layout_below="@id/thumbnail"
-                android:layout_marginTop="@dimen/ic_overflow_margin_top"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_dots" />
+                android:layout_below="@id/desc"
+                android:paddingBottom="@dimen/card_text_bottom2"
+                android:paddingLeft="@dimen/title_padding"
+                android:paddingRight="@dimen/title_padding"
+                android:textSize="@dimen/card_text2"
+               />
 
         </RelativeLayout>
 

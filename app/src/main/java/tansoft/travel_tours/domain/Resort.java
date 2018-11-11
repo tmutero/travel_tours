@@ -1,6 +1,8 @@
 package tansoft.travel_tours.domain;
 
-public class Resort {
+import android.support.annotation.NonNull;
+
+public class Resort  implements Comparable<Resort> {
 
     private int id;
     private String name;
@@ -11,6 +13,15 @@ public class Resort {
     private  String contact;
     private String amount;
     private String imageString;
+    private String distance;
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
 
     public String getImageString() {
         return imageString;
@@ -31,7 +42,7 @@ public class Resort {
     public Resort() {
     }
 
-    public Resort(String name, String contact, String serviceType, int id, Double latitude, Double longitude,String imageString) {
+    public Resort(String name, String contact, String serviceType, int id, Double latitude, Double longitude,String imageString, String distance) {
         this.name = name;
         this.contact = contact;
         this.serviceType = serviceType;
@@ -39,19 +50,11 @@ public class Resort {
         this.latitude=latitude;
         this.longitude=longitude;
     this.imageString=imageString;
+    this.distance=distance;
     }
 
 
-    public Resort(String name, String serviceType, Double longitude, Double latitude, String city, String contact, String amount, int id) {
-        this.name = name;
-        this.serviceType = serviceType;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.city = city;
-        this.contact = contact;
-        this.amount = amount;
-        this.id = id;
-    }
+
 
     public String getName() {
         return name;
@@ -108,6 +111,14 @@ public class Resort {
     public void setAmount(String amount) {
         this.amount = amount;
     }
+
+
+    @Override
+    public int compareTo(@NonNull Resort o) {
+        return o.getDistance().compareTo(this.getDistance());
+    }
+
+
 
 
 }

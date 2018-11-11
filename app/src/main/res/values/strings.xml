@@ -35,8 +35,7 @@
     <string name="pref_header_general">Preference Configures </string>
 
     <string name="pref_title_social_recommendations">Enable resorts recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for resorts to book
-        based on your search history
+    <string name="pref_description_social_recommendations">Recommendations for resorts based on your current loaction
     </string>
 
     <string name="pref_title_display_name">Display name</string>

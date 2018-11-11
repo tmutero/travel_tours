@@ -12,7 +12,7 @@
         android:capitalize="words"
         android:defaultValue="@string/pref_default_display_name"
         android:inputType="textCapWords"
-        android:key="example_text"
+        android:key="full_name"
         android:maxLines="1"
         android:selectAllOnFocus="true"
         android:singleLine="true"
@@ -25,7 +25,7 @@
         android:defaultValue="-1"
         android:entries="@array/pref_example_list_titles"
         android:entryValues="@array/pref_example_list_values"
-        android:key="example_list"
+        android:key="resort_location"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
         android:title="@string/pref_title_add_friends_to_messages" />
@@ -34,7 +34,7 @@
         android:defaultValue="-1"
         android:entries="@array/pref_weather_update_list"
         android:entryValues="@array/pref_weather_city_values"
-        android:key="example_list"
+        android:key="city_list"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
         android:title="@string/pre_weather_updates" />

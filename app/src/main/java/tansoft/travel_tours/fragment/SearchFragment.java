@@ -32,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +47,7 @@ import tansoft.travel_tours.domain.Resort;
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static com.android.volley.VolleyLog.TAG;
+import static java.util.Collections.sort;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -200,11 +202,13 @@ public class SearchFragment extends  FragmentBase {
                                 resorts.getInt( "id" ),
                                 resorts.getDouble("latitude"),
                                 resorts.getDouble("longitude"),
-                                resorts.getString("imageString")
+                                resorts.getString("imageString"),
+                                resorts.getString("distance")
 
                         ));
 
                     }
+                   sort(resortList);
                     rv.setAdapter(new ResortAdapter(resortList, getContext()));
 
                 } catch (JSONException e) {
