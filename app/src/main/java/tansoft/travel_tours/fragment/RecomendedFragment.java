@@ -1,14 +1,14 @@
 package tansoft.travel_tours.fragment;
 
-
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -17,9 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,7 +30,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,20 +46,15 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static com.android.volley.VolleyLog.TAG;
 import static java.util.Collections.sort;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class SearchFragment extends  FragmentBase {
 
-    private Button btnSearch;
-    private EditText textSearchResort;
+public class RecomendedFragment extends Fragment {
+
+    List<Resort> resortList;
+    RecyclerView rv;
     private ProgressDialog pDialog;
 
     Context mContext;
     RecyclerView.LayoutManager mLayoutManager;
-    List<Resort> resortList;
-    RecyclerView rv;
-
 
     private ArrayList<String> permissionsToRequest;
     private ArrayList<String> permissionsRejected = new ArrayList<>();
@@ -72,31 +64,30 @@ public class SearchFragment extends  FragmentBase {
     LocationTrack locationTrack;
 
 
-
-    public SearchFragment() {
+    public RecomendedFragment() {
         // Required empty public constructor
     }
 
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      //  View view = inflater.inflate(R.layout.fragment_search, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View root= inflater.inflate(R.layout.fragment_recomended, container, false);
 
-        View v = inflater.inflate(R.layout.fragment_search, container, false);
-        mContext = getContext();
+//Preference Engine Search Results
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        final String preferedService=sharedPrefs.getString("service_type", "Hotel and Conferences");
+        final String preferedCity= sharedPrefs.getString("city_list", "Harare");
 
-        textSearchResort = v.findViewById(R.id.search_resort);
 
-        btnSearch = v.findViewById(R.id.btnsearch_resort);
+        System.out.println("-----------------------"+preferedService);
+
 
         pDialog = new ProgressDialog(getContext());
         pDialog.setCancelable(false);
 
-
-
-
-        rv = v.findViewById(R.id.idRecyclerView);
+        rv = root.findViewById(R.id.idRecyclerViewRecomended);
         if (rv != null) {
             rv.setHasFixedSize(true);
         }
@@ -108,77 +99,69 @@ public class SearchFragment extends  FragmentBase {
 
 
 
+        permissions.add(ACCESS_FINE_LOCATION);
+        permissions.add(ACCESS_COARSE_LOCATION);
+
+        permissionsToRequest = findUnAskedPermissions(permissions);
+        //get the permissions we have asked for before but are not granted..
+        //we will store this in a global list to access later.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
 
-
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                if (textSearchResort.getText() == null) {
-                    displayNotification("Enter resort Name");
-                } else {
-                    String name = textSearchResort.getText().toString().toLowerCase();
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(textSearchResort.getWindowToken(), 0);
+            if (permissionsToRequest.size() > 0)
+                requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
+        }
 
 
-                    permissions.add(ACCESS_FINE_LOCATION);
-                    permissions.add(ACCESS_COARSE_LOCATION);
-
-                    permissionsToRequest = findUnAskedPermissions(permissions);
-                    //get the permissions we have asked for before but are not granted..
-                    //we will store this in a global list to access later.
-
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-
-                        if (permissionsToRequest.size() > 0)
-                            requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
-                    }
-
-
-                    locationTrack = new LocationTrack(getContext());
+        locationTrack = new LocationTrack(getContext());
 
 
 
 
-                    if (locationTrack.canGetLocation()) {
+        if (locationTrack.canGetLocation()) {
 
 
-                        double longitude = locationTrack.getLongitude();
-                        double latitude = locationTrack.getLatitude();
-                        getResorts(name,latitude,longitude);
-                        Toast.makeText(getContext(), "Longitude:" + Double.toString(longitude) + "\nLatitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
+            double longitude = locationTrack.getLongitude();
+            double latitude = locationTrack.getLatitude();
+            recomendResorts("",latitude,longitude);
 
-                    } else {
+        } else {
+
+            android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(getContext());
+            alertDialog.setTitle("Check Location Settings for recomendation list");
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+
+            alertDialog.setPositiveButton("Change",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            permissionsToRequest = findUnAskedPermissions(permissions);
+                        }
+                    });
+            alertDialog.setNegativeButton("Cancel",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            alertDialog.show();
 
 
-                        getResorts(name,0.0,0.0);
 
-                    }
-
-
-                }
-            }
-        });
+        }
 
 
 
 
-        return v;
-
+        return root;
     }
+    private void recomendResorts ( final String resortName, final Double lat, final Double lon){
 
 
-    private void getResorts ( final String resortName, final Double lat, final Double lon){
+        String tag_string_req = "recomend";
 
-
-        String tag_string_req = "req_login";
-
-        pDialog.setMessage("Search  ..." + resortName);
+        pDialog.setMessage("Loading  ...");
         showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -186,7 +169,7 @@ public class SearchFragment extends  FragmentBase {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Search Response: " + response);
+                Log.d(TAG, "Recomended Response: " + response);
                 hideDialog();
 
                 try {
@@ -208,7 +191,7 @@ public class SearchFragment extends  FragmentBase {
                         ));
 
                     }
-                   sort(resortList);
+                    sort(resortList);
                     rv.setAdapter(new ResortAdapter(resortList, getContext()));
 
                 } catch (JSONException e) {
@@ -247,12 +230,6 @@ public class SearchFragment extends  FragmentBase {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
 
-
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
     }
 

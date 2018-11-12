@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -56,8 +55,6 @@ public class WeatherFragment extends Fragment {
 
         final String preferedCity=sharedPrefs.getString("city_list", "Not known to us");
 
-        System.out.println("======================================="+preferedCity+","+"ZW");
-
 
         loader = root.findViewById(R.id.loader);
         selectCity = root.findViewById(R.id.selectCity);
@@ -79,7 +76,7 @@ public class WeatherFragment extends Fragment {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
                 alertDialog.setTitle("Change City");
                 final EditText input = new EditText(getContext());
-                input.setText(preferedCity+"ZW");
+                input.setText(preferedCity+","+"ZW");
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.MATCH_PARENT);

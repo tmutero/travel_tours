@@ -62,6 +62,9 @@
         <item>Victoria Falls</item>
         <item>Masvingo</item>
         <item>Kariba</item>
+        <item>Bindura</item>
+        <item>Kwekwe</item>
+        <item>Matobos</item>
 
     </string-array>
     <string-array name="pref_weather_city_values">
@@ -72,6 +75,26 @@
         <item>Victoria Falls</item>
         <item>Masvingo</item>
         <item>Kariba</item>
+        <item>Bindura</item>
+        <item>Kwekwe</item>
+        <item>Matobos</item>
+
+    </string-array>
+
+
+    <string name="pre_service_type">Allow Resorts by Services</string>
+    <string-array name="pref_resorts_service_list">
+        <item>Hotels and Conference</item>
+        <item>Game Reserves</item>
+        <item>Recreational Services</item>
+
+
+    </string-array>
+    <string-array name="pref_resorts_service_values">
+        <item>Hotels and Conference</item>
+        <item>Game Reserves</item>
+        <item>Recreational Services</item>
+
 
     </string-array>
 

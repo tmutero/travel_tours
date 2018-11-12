@@ -1,10 +1,8 @@
 package tansoft.travel_tours.fragment;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -70,8 +68,8 @@ public class DashboardFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager settingsFm = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = settingsFm.beginTransaction();
-                ft.replace(R.id.frag_container, new SearchFragment());
-                ft.addToBackStack("SearchFragment");
+                ft.replace(R.id.frag_container, new RecomendedFragment());
+                ft.addToBackStack("RecomendFragment");
                 ft.commit();
             }
         });

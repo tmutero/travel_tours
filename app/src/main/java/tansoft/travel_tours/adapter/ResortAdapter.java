@@ -61,6 +61,7 @@ public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProd
                 bundle.putString("city", resort.getCity());
                 bundle.putString("serviceType", resort.getServiceType());
                 bundle.putString("imageString",resort.getImageString());
+                bundle.putInt("resortID",resort.getId());
 
                 ResortViewFragment addProductFragment = new ResortViewFragment();
                 addProductFragment.setArguments(bundle);
