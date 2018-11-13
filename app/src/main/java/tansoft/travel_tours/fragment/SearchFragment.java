@@ -143,20 +143,20 @@ public class SearchFragment extends  FragmentBase {
                     locationTrack = new LocationTrack(getContext());
 
 
-
+                    double longitude = locationTrack.getLongitude();
+                    double latitude = locationTrack.getLatitude();
 
                     if (locationTrack.canGetLocation()) {
 
 
-                        double longitude = locationTrack.getLongitude();
-                        double latitude = locationTrack.getLatitude();
+                        System.out.println("----------------------======-----"+latitude);
                         getResorts(name,latitude,longitude);
                         Toast.makeText(getContext(), "Longitude:" + Double.toString(longitude) + "\nLatitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
 
                     } else {
 
 
-                        getResorts(name,0.0,0.0);
+//                        getResorts(name,0.0,0.0);
 
                     }
 

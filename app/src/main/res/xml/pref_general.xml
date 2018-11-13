@@ -47,6 +47,6 @@
         android:key="service_type"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
-        android:title="@string/pre_weather_updates" />
+        android:title="@string/pre_service_type" />
 
 </PreferenceScreen>

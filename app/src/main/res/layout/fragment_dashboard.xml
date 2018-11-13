@@ -26,7 +26,6 @@
                     android:id="@+id/booking"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:background="@drawable/ic_touch_app_black_24dp"
                     android:padding="10dp" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -65,7 +64,6 @@
                     android:id="@+id/weather_icon"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:background="@drawable/ic_weather_black_24dp"
 
                     android:padding="10dp" />
                 <TextView
@@ -114,7 +112,7 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:padding="10dp"
-                    android:src="@drawable/ic_configure_black_24dp" />
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -155,7 +153,6 @@
                     android:id="@+id/resort_search"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:background="@drawable/ic_search_black_24dp"
                     android:padding="10dp" />
 
                 <TextView
