@@ -36,6 +36,7 @@ import java.util.Map;
 
 import tansoft.travel_tours.R;
 import tansoft.travel_tours.Utils.LocationTrack;
+import tansoft.travel_tours.adapter.RecomendedAdapter;
 import tansoft.travel_tours.adapter.ResortAdapter;
 import tansoft.travel_tours.config.AppConfig;
 import tansoft.travel_tours.config.AppController;
@@ -79,9 +80,6 @@ public class RecomendedFragment extends Fragment {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         final String preferedService=sharedPrefs.getString("service_type", "Hotel and Conferences");
         final String preferedCity= sharedPrefs.getString("city_list", "Harare");
-
-
-        System.out.println("-----------------------"+preferedService);
 
 
         pDialog = new ProgressDialog(getContext());
@@ -192,7 +190,7 @@ public class RecomendedFragment extends Fragment {
 
                     }
                     sort(resortList);
-                    rv.setAdapter(new ResortAdapter(resortList, getContext()));
+                    rv.setAdapter(new RecomendedAdapter(resortList, getContext()));
 
                 } catch (JSONException e) {
                     // JSON error
