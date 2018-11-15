@@ -9,7 +9,9 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -35,9 +37,10 @@ import java.util.List;
 import java.util.Map;
 
 import tansoft.travel_tours.R;
+
+import tansoft.travel_tours.Utils.GpsTracker;
 import tansoft.travel_tours.Utils.LocationTrack;
 import tansoft.travel_tours.adapter.RecomendedAdapter;
-import tansoft.travel_tours.adapter.ResortAdapter;
 import tansoft.travel_tours.config.AppConfig;
 import tansoft.travel_tours.config.AppController;
 import tansoft.travel_tours.domain.Resort;
@@ -49,7 +52,7 @@ import static java.util.Collections.sort;
 
 
 public class RecomendedFragment extends Fragment {
-
+    private GpsTracker gpsTracker;
     List<Resort> resortList;
     RecyclerView rv;
     private ProgressDialog pDialog;
@@ -80,6 +83,9 @@ public class RecomendedFragment extends Fragment {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         final String preferedService=sharedPrefs.getString("service_type", "Hotel and Conferences");
         final String preferedCity= sharedPrefs.getString("city_list", "Harare");
+        final  String preferedLocation=sharedPrefs.getString("resort_location","");
+
+
 
 
         pDialog = new ProgressDialog(getContext());
@@ -89,41 +95,31 @@ public class RecomendedFragment extends Fragment {
         if (rv != null) {
             rv.setHasFixedSize(true);
         }
-        mLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        mLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.GAP_HANDLING_LAZY);
         //mRecyclerView.setLayoutManager(mLayoutManager);
         rv.setLayoutManager(mLayoutManager);
 
         resortList = new ArrayList<>();
-
-
-
-        permissions.add(ACCESS_FINE_LOCATION);
-        permissions.add(ACCESS_COARSE_LOCATION);
-
-        permissionsToRequest = findUnAskedPermissions(permissions);
-        //get the permissions we have asked for before but are not granted..
-        //we will store this in a global list to access later.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-
-            if (permissionsToRequest.size() > 0)
-                requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
+        try {
+            if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
 
+        gpsTracker = new GpsTracker(getContext());
+        if(gpsTracker.canGetLocation()){
+            double latitude = gpsTracker.getLatitude();
+            double longitude = gpsTracker.getLongitude();
+            //  System.out.println("----------------------------------------"+longitude);
 
-        locationTrack = new LocationTrack(getContext());
+            recomendResorts("",latitude,longitude,preferedService,preferedCity);
 
 
 
+        }else{
 
-        if (locationTrack.canGetLocation()) {
-
-
-            double longitude = locationTrack.getLongitude();
-            double latitude = locationTrack.getLatitude();
-            recomendResorts("",latitude,longitude);
-
-        } else {
 
             android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(getContext());
             alertDialog.setTitle("Check Location Settings for recomendation list");
@@ -134,7 +130,7 @@ public class RecomendedFragment extends Fragment {
             alertDialog.setPositiveButton("Change",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            permissionsToRequest = findUnAskedPermissions(permissions);
+                            gpsTracker.showSettingsAlert();
                         }
                     });
             alertDialog.setNegativeButton("Cancel",
@@ -145,16 +141,22 @@ public class RecomendedFragment extends Fragment {
                     });
             alertDialog.show();
 
-
-
+            gpsTracker.showSettingsAlert();
         }
+
+
+
+
+
+
+
 
 
 
 
         return root;
     }
-    private void recomendResorts ( final String resortName, final Double lat, final Double lon){
+    private void recomendResorts ( final String resortName, final Double lat, final Double lon, final String preferedService, final String preferedCity){
 
 
         String tag_string_req = "recomend";
@@ -163,7 +165,7 @@ public class RecomendedFragment extends Fragment {
         showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_RESORT_SEARCH, new Response.Listener<String>() {
+                AppConfig.URL_ENGINE, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -184,7 +186,8 @@ public class RecomendedFragment extends Fragment {
                                 resorts.getDouble("latitude"),
                                 resorts.getDouble("longitude"),
                                 resorts.getString("imageString"),
-                                resorts.getString("distance")
+                                resorts.getString("distance"),
+                                resorts.getString("amount")
 
                         ));
 
@@ -216,8 +219,10 @@ public class RecomendedFragment extends Fragment {
                 Map<String, String> params = new HashMap<>();
                 HashMap<String, Double> params2 = new HashMap<>();
                 params.put("resortName", resortName);
-                params2.put("latitude", lat);
-                params2.put("longitude", lon);
+                params.put("preferedService",preferedService);
+                params.put("preferedCity",preferedCity);
+                params.put("latitude", String.valueOf(lat));
+                params.put("longitude", String.valueOf(lon));
 
 
                 return params;

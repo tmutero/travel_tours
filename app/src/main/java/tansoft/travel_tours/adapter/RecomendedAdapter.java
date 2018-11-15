@@ -44,7 +44,7 @@ public class RecomendedAdapter   extends RecyclerView.Adapter<RecomendedAdapter.
         holder.textViewTitle.setText(resortList.get(position).getName());
         holder.textViewShortDesc.setText(resortList.get(position).getServiceType());
         holder.textDistance.setText(resortList.get(position).getDistance()+" :"+"KM from here.");
-        holder.textPrice.setText(resortList.get(position).getAmount());
+        holder.textPrice.setText("$"+" "+resortList.get(position).getAmount());
 
         Glide.with(context)
                 .load(AppConfig.URL_IMAGE+resort.getImageString())

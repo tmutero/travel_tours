@@ -2,6 +2,9 @@ package tansoft.travel_tours.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +20,7 @@ import java.util.List;
 import tansoft.travel_tours.R;
 import tansoft.travel_tours.config.AppConfig;
 import tansoft.travel_tours.domain.Resort;
+import tansoft.travel_tours.fragment.BookingFragment;
 import tansoft.travel_tours.fragment.ResortViewFragment;
 
 public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProductViewHolder>{
@@ -26,6 +30,7 @@ public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProd
     public ResortAdapter(List<Resort> resortList, Context context) {
         this.resortList = resortList;
         this.context = context;
+
     }
 
     @Override
@@ -38,17 +43,18 @@ public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProd
 
     @Override
     public void onBindViewHolder(ResortProductViewHolder holder, final int position) {
-
         final Resort resort = resortList.get(position);
-        holder.resortName.setText(resortList.get(position).getName());
-        holder.resortService.setText(resortList.get(position).getServiceType());
-        holder.distance.setText(resortList.get(position).getDistance()+" :"+"KM from here.");
+        holder.textViewTitle.setText(resortList.get(position).getName());
+        holder.textViewShortDesc.setText(resortList.get(position).getServiceType());
+        holder.textDistance.setText(resortList.get(position).getDistance()+" :"+"KM from here.");
+        holder.textPrice.setText("$"+" "+resortList.get(position).getAmount());
 
         Glide.with(context)
                 .load(AppConfig.URL_IMAGE+resort.getImageString())
-                .into(holder.imageResortImage);
+                .into(holder.imageView);
 
-        holder.imageResortImage.setOnClickListener(new View.OnClickListener() {
+
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -79,15 +85,31 @@ public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProd
 
     public class ResortProductViewHolder extends RecyclerView.ViewHolder {
         ImageView imageResortImage;
-        TextView resortName;
-        TextView resortService, distance;
+        ImageView imageView;
+        TextView textViewTitle;
+        TextView textViewShortDesc, textDistance,textPrice;
         public ResortProductViewHolder(View view) {
             super(view);
-            imageResortImage=view.findViewById(R.id.thumbnail);
-            resortName=view.findViewById(R.id.title);
-            resortService = view.findViewById(R.id.desc);
-            distance=view.findViewById(R.id.distance);
-
+            imageView=view.findViewById(R.id.imageView);
+            textViewTitle=view.findViewById(R.id.textViewTitle);
+            textViewShortDesc = view.findViewById(R.id.textViewShortDesc);
+            textDistance=view.findViewById(R.id.textDistance);
+            textPrice=view.findViewById(R.id.textPrice);
         }
     }
+
+    private static double distance(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = (dist * Math.PI / 180.0);
+        dist = dist * 60 * 1.1515;
+        dist = dist * 1.609344 * 1000;
+
+        return (dist);
+    }
+    private static double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
 }

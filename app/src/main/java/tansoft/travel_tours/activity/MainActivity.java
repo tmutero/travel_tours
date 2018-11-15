@@ -1,33 +1,32 @@
 package tansoft.travel_tours.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
-import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.google.android.gms.location.LocationListener;
+
 import java.util.HashMap;
 
 import tansoft.travel_tours.R;
-import tansoft.travel_tours.Utils.LocationTrack;
+
+
+import tansoft.travel_tours.Utils.GpsTracker;
 import tansoft.travel_tours.fragment.DashboardFragment;
 import tansoft.travel_tours.services.SQLiteHandler;
 import tansoft.travel_tours.services.SessionManager;
 
 
-public class MainActivity extends BaseActivity {
-
+public class MainActivity extends BaseActivity implements LocationListener {
+    private GpsTracker gpsTracker;
     private SQLiteHandler db;
     private SessionManager session;
-    private TextView txtName;
-    private ArrayList<String> permissionsToRequest;
-    private ArrayList<String> permissionsRejected = new ArrayList<>();
-    private ArrayList<String> permissions = new ArrayList<>();
-
-    private final static int ALL_PERMISSIONS_RESULT = 101;
-    LocationTrack locationTrack;
 
 
     @Override
@@ -62,6 +61,15 @@ public class MainActivity extends BaseActivity {
         displayDrawer(); // Displays the toolbar and the drawer
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+        try {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+     //   getLocation();
     }
 
 
@@ -77,5 +85,8 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onLocationChanged(Location location) {
 
+    }
 }

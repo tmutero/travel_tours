@@ -145,6 +145,8 @@ public class LoginActivity extends AppCompatActivity {
                                 MainActivity.class);
                         startActivity(intent);
                         finish();
+                        Toast.makeText(getApplicationContext(), "User successfully login.", Toast.LENGTH_LONG).show();
+
                     } else {
                         // Error in login. Get the error message
                         String errorMsg = jObj.getString("error_msg");

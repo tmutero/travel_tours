@@ -20,9 +20,10 @@
 
                 <ImageView
                     android:id="@+id/resort_image"
-                    android:layout_width="400dp"
-                    android:layout_height="243dp"
+                    android:layout_width="200dp"
+                    android:layout_height="160dp"
                     android:padding="1dp"
+                    android:layout_gravity="center_horizontal"
                     android:scaleType="centerCrop"
                     android:cropToPadding="true" />
 

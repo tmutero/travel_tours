@@ -53,6 +53,19 @@ public class Resort implements Comparable<Resort> {
         this.distance = distance;
     }
 
+    public Resort(String name, String contact, String serviceType, int id, Double latitude, Double longitude, String imageString, String distance, String amount) {
+        this.name = name;
+        this.contact = contact;
+        this.serviceType = serviceType;
+        this.id = id;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.imageString = imageString;
+        this.distance = distance;
+        this.amount=amount;
+    }
+
+
 
     public String getName() {
         return name;

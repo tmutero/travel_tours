@@ -9,7 +9,9 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -32,28 +34,25 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import tansoft.travel_tours.R;
 import tansoft.travel_tours.Utils.LocationTrack;
+import tansoft.travel_tours.Utils.GpsTracker;
 import tansoft.travel_tours.adapter.ResortAdapter;
 import tansoft.travel_tours.config.AppConfig;
 import tansoft.travel_tours.config.AppController;
 import tansoft.travel_tours.domain.Resort;
 
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static com.android.volley.VolleyLog.TAG;
-import static java.util.Collections.sort;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchFragment extends  FragmentBase {
-
+public class SearchFragment extends FragmentBase {
+    private GpsTracker gpsTracker;
     private Button btnSearch;
     private EditText textSearchResort;
     private ProgressDialog pDialog;
@@ -86,14 +85,22 @@ public class SearchFragment extends  FragmentBase {
         View v = inflater.inflate(R.layout.fragment_search, container, false);
         mContext = getContext();
 
+
+        try {
+            if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
         textSearchResort = v.findViewById(R.id.search_resort);
 
         btnSearch = v.findViewById(R.id.btnsearch_resort);
 
         pDialog = new ProgressDialog(getContext());
         pDialog.setCancelable(false);
-
-
 
 
         rv = v.findViewById(R.id.idRecyclerView);
@@ -107,6 +114,14 @@ public class SearchFragment extends  FragmentBase {
         resortList = new ArrayList<>();
 
 
+
+        try {
+            if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
 
 
@@ -123,42 +138,24 @@ public class SearchFragment extends  FragmentBase {
                     InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(textSearchResort.getWindowToken(), 0);
 
-
-                    permissions.add(ACCESS_FINE_LOCATION);
-                    permissions.add(ACCESS_COARSE_LOCATION);
-
-                    permissionsToRequest = findUnAskedPermissions(permissions);
-                    //get the permissions we have asked for before but are not granted..
-                    //we will store this in a global list to access later.
-
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    gpsTracker = new GpsTracker(getContext());
+                    if(gpsTracker.canGetLocation()){
+                        double latitude = gpsTracker.getLatitude();
+                        double longitude = gpsTracker.getLongitude();
+                       System.out.println("----------------------------------------"+longitude);
+                         getResorts(name,latitude,longitude);
 
 
-                        if (permissionsToRequest.size() > 0)
-                            requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
+                    }else{
+
+
+                         getResorts(name,0.0,0.0);
+
+
+                        gpsTracker.showSettingsAlert();
                     }
 
 
-                    locationTrack = new LocationTrack(getContext());
-
-
-                    double longitude = locationTrack.getLongitude();
-                    double latitude = locationTrack.getLatitude();
-
-                    if (locationTrack.canGetLocation()) {
-
-
-                        System.out.println("----------------------======-----"+latitude);
-                        getResorts(name,latitude,longitude);
-                        Toast.makeText(getContext(), "Longitude:" + Double.toString(longitude) + "\nLatitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
-
-                    } else {
-
-
-//                        getResorts(name,0.0,0.0);
-
-                    }
 
 
                 }
@@ -175,9 +172,9 @@ public class SearchFragment extends  FragmentBase {
 
     private void getResorts ( final String resortName, final Double lat, final Double lon){
 
-
         String tag_string_req = "req_login";
-
+        System.out.println("---------------------------------------"+String.valueOf(lat));
+        Double d= Double.valueOf(String.valueOf(lat));
         pDialog.setMessage("Search  ..." + resortName);
         showDialog();
 
@@ -203,12 +200,15 @@ public class SearchFragment extends  FragmentBase {
                                 resorts.getDouble("latitude"),
                                 resorts.getDouble("longitude"),
                                 resorts.getString("imageString"),
-                                resorts.getString("distance")
+                                resorts.getString("distance"),
+                                resorts.getString("amount")
+
+
 
                         ));
 
                     }
-                   sort(resortList);
+                 //  sort(resortList);
                     rv.setAdapter(new ResortAdapter(resortList, getContext()));
 
                 } catch (JSONException e) {
@@ -233,10 +233,11 @@ public class SearchFragment extends  FragmentBase {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
-                HashMap<String, Double> params2 = new HashMap<>();
+
+
                 params.put("resortName", resortName);
-                params2.put("latitude", lat);
-                params2.put("longitude", lon);
+                params.put("latitude", String.valueOf(lat));
+                params.put("longitude", String.valueOf(lon));
 
 
                 return params;
@@ -262,7 +263,7 @@ public class SearchFragment extends  FragmentBase {
             pDialog.show();
     }
 
-    private void hideDialog () {
+    private void hideDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }

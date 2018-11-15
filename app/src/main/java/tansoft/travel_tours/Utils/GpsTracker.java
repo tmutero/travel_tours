@@ -1,4 +1,4 @@
-package tansoft.travel_tours.activity;
+package tansoft.travel_tours.Utils;
 
 import android.Manifest;
 import android.app.Activity;
