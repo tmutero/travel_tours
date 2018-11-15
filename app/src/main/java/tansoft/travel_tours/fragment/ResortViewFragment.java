@@ -171,6 +171,7 @@ public class ResortViewFragment extends Fragment {
 
     private void booking(final String resortName, final String clientEmail) {
         // Tag used to cancel the request
+
         String tag_string_req = "req_login";
 
         pDialog.setMessage("Book in ...");

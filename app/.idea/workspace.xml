@@ -69,21 +69,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c4dc2cbf-eef5-47d1-ae99-938c0f67ee09" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/book.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/recom.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/settings.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/weather.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tansoft/travel_tours/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tansoft/travel_tours/config/AppConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tansoft/travel_tours/fragment/ResortViewFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tansoft/travel_tours/fragment/ResortViewFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_dashboard.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_dashboard.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_resort_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_resort_view.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_weather.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_weather.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/menu/activity_main_drawer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/menu/activity_main_drawer.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../gradle.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
@@ -139,14 +130,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1715" />
+          <entry key="java" value="1716" />
           <entry key="txt" value="28" />
           <entry key="xml" value="197" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1715" />
+          <entry key="JAVA" value="1716" />
           <entry key="PLAIN_TEXT" value="28" />
           <entry key="XML" value="197" />
         </counts>
@@ -167,8 +158,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/tansoft/travel_tours/fragment/ResortViewFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="70" column="58" selection-start-line="70" selection-start-column="58" selection-end-line="70" selection-end-column="58" />
+            <state relative-caret-position="254">
+              <caret line="217" column="13" selection-start-line="217" selection-start-column="13" selection-end-line="217" selection-end-column="13" />
               <folding>
                 <element signature="e#3662#4435#0" expanded="true" />
                 <element signature="e#4434#4435#0" expanded="true" />
@@ -191,11 +182,11 @@
           <provider editor-type-id="android-designer2" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/tansoft/travel_tours/config/AppConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="21" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="135">
+              <caret line="9" column="58" selection-start-line="9" selection-start-column="58" selection-end-line="9" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -220,11 +211,11 @@
           <provider editor-type-id="android-designer2" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="84" column="61" selection-start-line="84" selection-start-column="53" selection-end-line="84" selection-end-column="61" />
+            <state relative-caret-position="321">
+              <caret line="125" column="19" selection-start-line="125" selection-start-column="19" selection-end-line="125" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -260,20 +251,22 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>----------------------======-----</find>
-      <find>10.20.101.163</find>
       <find>http://192.168.57.1/</find>
       <find>no</find>
       <find>10.20.101.163/</find>
       <find>city_list</find>
       <find>==========================</find>
-      <find>http://192.168.43.131</find>
       <find>pho</find>
+      <find>http://192.168.43.131</find>
+      <find>10.20.101.163</find>
     </findStrings>
     <replaceStrings>
       <replace>192.168.57.1</replace>
       <replace>http://10.20.101.163/</replace>
       <replace>192.168.43.131/</replace>
       <replace>http://10.20.101.163</replace>
+      <replace>http://10.</replace>
+      <replace>172.16.0.145</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -304,10 +297,10 @@
         <option value="$PROJECT_DIR$/src/main/java/tansoft/travel_tours/fragment/RecomendedFragment.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/fragment_dashboard.xml" />
         <option value="$PROJECT_DIR$/src/main/res/menu/activity_main_drawer.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/tansoft/travel_tours/config/AppConfig.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/fragment_weather.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/fragment_resort_view.xml" />
         <option value="$PROJECT_DIR$/src/main/java/tansoft/travel_tours/fragment/ResortViewFragment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tansoft/travel_tours/config/AppConfig.java" />
       </list>
     </option>
   </component>
@@ -385,6 +378,17 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="travel_tours" type="462c0819:PsiDirectoryNode" />
+              <item name="activity" type="462c0819:PsiDirectoryNode" />
+              <item name="preference" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="travel_tours" type="b2602c69:ProjectViewProjectNode" />
+              <item name="travel_tours" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="travel_tours" type="462c0819:PsiDirectoryNode" />
               <item name="adapter" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -405,7 +409,37 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="travel_tours" type="462c0819:PsiDirectoryNode" />
+              <item name="domain" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="travel_tours" type="b2602c69:ProjectViewProjectNode" />
+              <item name="travel_tours" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="travel_tours" type="462c0819:PsiDirectoryNode" />
               <item name="fragment" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="travel_tours" type="b2602c69:ProjectViewProjectNode" />
+              <item name="travel_tours" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="travel_tours" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="travel_tours" type="b2602c69:ProjectViewProjectNode" />
+              <item name="travel_tours" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="travel_tours" type="462c0819:PsiDirectoryNode" />
+              <item name="Utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="travel_tours" type="b2602c69:ProjectViewProjectNode" />
@@ -523,7 +557,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
-    <property name="device.picker.selection" value="CCMBBCB681952159" />
+    <property name="device.picker.selection" value="192.168.57.101:5555" />
     <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/oneall-mobile" />
     <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.0" />
@@ -651,7 +685,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="686" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.31969696" />
@@ -996,13 +1029,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tansoft/travel_tours/config/AppConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/layout_resort_card.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="433">
@@ -1019,10 +1045,25 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_resort_view.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="211" column="15" selection-start-line="211" selection-start-column="15" selection-end-line="211" selection-end-column="15" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="125" column="19" selection-start-line="125" selection-start-column="19" selection-end-line="125" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tansoft/travel_tours/fragment/ResortViewFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="70" column="58" selection-start-line="70" selection-start-column="58" selection-end-line="70" selection-end-column="58" />
+        <state relative-caret-position="254">
+          <caret line="217" column="13" selection-start-line="217" selection-start-column="13" selection-end-line="217" selection-end-column="13" />
           <folding>
             <element signature="e#3662#4435#0" expanded="true" />
             <element signature="e#4434#4435#0" expanded="true" />
@@ -1034,18 +1075,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_resort_view.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/tansoft/travel_tours/config/AppConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="211" column="15" selection-start-line="211" selection-start-column="15" selection-end-line="211" selection-end-column="15" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="84" column="61" selection-start-line="84" selection-start-column="53" selection-end-line="84" selection-end-column="61" />
+        <state relative-caret-position="135">
+          <caret line="9" column="58" selection-start-line="9" selection-start-column="58" selection-end-line="9" selection-end-column="58" />
         </state>
       </provider>
     </entry>
