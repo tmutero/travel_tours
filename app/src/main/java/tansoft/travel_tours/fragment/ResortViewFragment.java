@@ -94,6 +94,7 @@ public class ResortViewFragment extends Fragment {
         companyName.setText("Resort Name: " + resortName);
         phonenumber.setText(contactDetails);
         physicaladdress.setText(serviceType);
+        phonenumber.setText(contactDetails);
 
         Glide.with(getActivity().getApplicationContext())
                 .load(AppConfig.URL_IMAGE+imageString)
@@ -105,18 +106,19 @@ public class ResortViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String geoUri = null;
-                if(longitude !=null && longitude !=null) {
-                    geoUri = "http://maps.google.com/maps?q=" + latitude + "," + longitude + " (" + resortName + ")";
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
-                    intent.setPackage("com.google.android.apps.maps");
-                    startActivity(intent);
+                try {
+                    if (longitude != null && longitude != null) {
+                        geoUri = "http://maps.google.com/maps?q=" + latitude + "," + longitude + " (" + resortName + ")";
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
+                        intent.setPackage("com.google.android.apps.maps");
+                        startActivity(intent);
+                    } else {
 
-
-
-                }
-                  else {
-
-                    Toast.makeText(getContext(), "Location of this resort is not available.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Location of this resort is not available.", Toast.LENGTH_SHORT).show();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(getActivity().getApplicationContext(), "Install google maps to view location", Toast.LENGTH_SHORT).show();
                 }
             }
         });

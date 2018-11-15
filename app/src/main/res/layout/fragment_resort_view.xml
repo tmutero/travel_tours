@@ -135,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rating_orders_wishlist"
-                android:text="Check City Weather"
+                android:text=""
                 android:textColor="#7000000f"
                 android:layout_centerInParent="true"
                 android:textSize="12dp" />
@@ -146,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/delivery"
-                android:hint="Payment methods" />
+                android:hint="" />
 
             <LinearLayout
                 android:id="@+id/addressHolder"
