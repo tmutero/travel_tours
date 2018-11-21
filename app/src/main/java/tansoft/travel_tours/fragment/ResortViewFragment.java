@@ -81,6 +81,7 @@ public class ResortViewFragment extends Fragment {
         longitude=bundle.getDouble("longitude");
         city=bundle.getString("city");
         imageString=bundle.getString("imageString");
+        resortID=bundle.getString("resortID");
 
         productImage = root.findViewById(R.id.resort_image);
         companyName = root.findViewById(R.id.companyName);
@@ -131,7 +132,8 @@ public class ResortViewFragment extends Fragment {
         // Fetching user details from SQLite
         HashMap<String, String> user = db.getUserDetails();
 
-         final String clientEmail = user.get("email");
+         final String clientID = user.get("uid");
+
 
 
         booking.setOnClickListener(new View.OnClickListener() {
@@ -148,10 +150,8 @@ public class ResortViewFragment extends Fragment {
                 alertDialog.setPositiveButton("Book",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                booking(resortName,clientEmail);
-
-
-                                System.out.println("------------------------------"+resortName+"======="+clientEmail);
+                                booking(resortID,clientID);
+                                System.out.println("------------------------------"+resortID+"=======");
                             }
                         });
                 alertDialog.setNegativeButton("Cancel",
@@ -169,7 +169,7 @@ public class ResortViewFragment extends Fragment {
     }
 
 
-    private void booking(final String resortName, final String clientEmail) {
+    private void booking(final String resortID, final String clientID) {
         // Tag used to cancel the request
 
         String tag_string_req = "req_login";
@@ -222,8 +222,8 @@ public class ResortViewFragment extends Fragment {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("resortName", resortName);
-                params.put("clientEmail", clientEmail);
+                params.put("resortID", resortID);
+                params.put("clientID", clientID);
 
                 return params;
             }

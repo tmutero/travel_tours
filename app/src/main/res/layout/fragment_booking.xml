@@ -5,10 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".fragment.BookingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/idBookedView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="723dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        tools:ignore="MissingConstraints" />
 
 </FrameLayout>

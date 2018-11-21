@@ -2,9 +2,11 @@ package tansoft.travel_tours.domain;
 
 import android.support.annotation.NonNull;
 
-public class Resort implements Comparable<Resort> {
+import java.util.Date;
 
-    private int id;
+public class Resort  {
+
+    private String id;
     private String name;
     private String serviceType;
     private Double longitude;
@@ -14,6 +16,16 @@ public class Resort implements Comparable<Resort> {
     private String amount;
     private String imageString;
     private String distance;
+
+    private String dateCreated;
+
+    public String getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 
     public String getDistance() {
         return distance;
@@ -31,18 +43,25 @@ public class Resort implements Comparable<Resort> {
         this.imageString = imageString;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     public Resort() {
     }
 
-    public Resort(String name, String contact, String serviceType, int id, Double latitude, Double longitude, String imageString, String distance) {
+    public Resort(String id, String name, String serviceType, String dateCreated) {
+        this.id = id;
+        this.name = name;
+        this.serviceType = serviceType;
+        this.dateCreated = dateCreated;
+    }
+
+    public Resort(String name, String contact, String serviceType, String id, Double latitude, Double longitude, String imageString, String distance) {
         this.name = name;
         this.contact = contact;
         this.serviceType = serviceType;
@@ -53,7 +72,7 @@ public class Resort implements Comparable<Resort> {
         this.distance = distance;
     }
 
-    public Resort(String name, String contact, String serviceType, int id, Double latitude, Double longitude, String imageString, String distance, String amount) {
+    public Resort(String name, String contact, String serviceType, String id, Double latitude, Double longitude, String imageString, String distance, String amount) {
         this.name = name;
         this.contact = contact;
         this.serviceType = serviceType;
@@ -124,10 +143,7 @@ public class Resort implements Comparable<Resort> {
     }
 
 
-    @Override
-    public int compareTo(@NonNull Resort o) {
-        return o.getDistance().compareTo(this.getDistance());
-    }
+
 
 
 }

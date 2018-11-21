@@ -65,7 +65,6 @@ public class RecomendedFragment extends Fragment {
     private ArrayList<String> permissions = new ArrayList<>();
 
     private final static int ALL_PERMISSIONS_RESULT = 101;
-    LocationTrack locationTrack;
 
 
     public RecomendedFragment() {
@@ -84,8 +83,6 @@ public class RecomendedFragment extends Fragment {
         final String preferedService=sharedPrefs.getString("service_type", "Hotel and Conferences");
         final String preferedCity= sharedPrefs.getString("city_list", "Harare");
         final  String preferedLocation=sharedPrefs.getString("resort_location","");
-
-
 
 
         pDialog = new ProgressDialog(getContext());
@@ -145,15 +142,6 @@ public class RecomendedFragment extends Fragment {
         }
 
 
-
-
-
-
-
-
-
-
-
         return root;
     }
     private void recomendResorts ( final String resortName, final Double lat, final Double lon, final String preferedService, final String preferedCity){
@@ -178,11 +166,12 @@ public class RecomendedFragment extends Fragment {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject resorts = jsonArray.getJSONObject(i);
 
+
                         resortList.add(new Resort(
                                 resorts.getString("name"),
                                 resorts.getString("contact"),
                                 resorts.getString( "serviceType" ),
-                                resorts.getInt( "resortID" ),
+                                resorts.getString( "resortID" ),
                                 resorts.getDouble("latitude"),
                                 resorts.getDouble("longitude"),
                                 resorts.getString("imageString"),
@@ -191,8 +180,9 @@ public class RecomendedFragment extends Fragment {
 
                         ));
 
+
                     }
-                    sort(resortList);
+                   // sort(resortList);
                     rv.setAdapter(new RecomendedAdapter(resortList, getContext()));
 
                 } catch (JSONException e) {

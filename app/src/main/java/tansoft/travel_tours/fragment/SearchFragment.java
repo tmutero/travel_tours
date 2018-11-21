@@ -196,7 +196,7 @@ public class SearchFragment extends FragmentBase {
                                 resorts.getString("name"),
                                 resorts.getString("contact"),
                                 resorts.getString( "serviceType" ),
-                                resorts.getInt( "resortID" ),
+                                resorts.getString( "resortID" ),
                                 resorts.getDouble("latitude"),
                                 resorts.getDouble("longitude"),
                                 resorts.getString("imageString"),

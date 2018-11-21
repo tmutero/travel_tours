@@ -63,8 +63,7 @@ public class RecomendedAdapter   extends RecyclerView.Adapter<RecomendedAdapter.
                 bundle.putString("city", resort.getCity());
                 bundle.putString("serviceType", resort.getServiceType());
                 bundle.putString("imageString",resort.getImageString());
-                bundle.putInt("resortID",resort.getId());
-
+                bundle.putString("resortID",resort.getId());
                 ResortViewFragment addProductFragment = new ResortViewFragment();
                 addProductFragment.setArguments(bundle);
                 activity.getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frag_container, addProductFragment).commit();
@@ -86,7 +85,7 @@ public class RecomendedAdapter   extends RecyclerView.Adapter<RecomendedAdapter.
         public ResortProductViewHolder(View view) {
             super(view);
             imageView=view.findViewById(R.id.imageView);
-            textViewTitle=view.findViewById(R.id.textViewTitle);
+            textViewTitle=view.findViewById(R.id.resort_name);
             textViewShortDesc = view.findViewById(R.id.textViewShortDesc);
             textDistance=view.findViewById(R.id.textDistance);
             textPrice=view.findViewById(R.id.textPrice);

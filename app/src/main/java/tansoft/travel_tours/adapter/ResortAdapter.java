@@ -2,9 +2,6 @@ package tansoft.travel_tours.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,7 +17,6 @@ import java.util.List;
 import tansoft.travel_tours.R;
 import tansoft.travel_tours.config.AppConfig;
 import tansoft.travel_tours.domain.Resort;
-import tansoft.travel_tours.fragment.BookingFragment;
 import tansoft.travel_tours.fragment.ResortViewFragment;
 
 public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProductViewHolder>{
@@ -67,7 +63,7 @@ public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProd
                 bundle.putString("city", resort.getCity());
                 bundle.putString("serviceType", resort.getServiceType());
                 bundle.putString("imageString",resort.getImageString());
-                bundle.putInt("resortID",resort.getId());
+                bundle.putString("resortID",resort.getId());
 
                 ResortViewFragment addProductFragment = new ResortViewFragment();
                 addProductFragment.setArguments(bundle);
@@ -91,7 +87,7 @@ public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProd
         public ResortProductViewHolder(View view) {
             super(view);
             imageView=view.findViewById(R.id.imageView);
-            textViewTitle=view.findViewById(R.id.textViewTitle);
+            textViewTitle=view.findViewById(R.id.resort_name);
             textViewShortDesc = view.findViewById(R.id.textViewShortDesc);
             textDistance=view.findViewById(R.id.textDistance);
             textPrice=view.findViewById(R.id.textPrice);
