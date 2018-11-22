@@ -160,7 +160,7 @@ public class ResortViewFragment extends Fragment {
                 alertDialog.setNegativeButton("Payment",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                               String ussdCode = "*151*1*1*0774226217" + Uri.encode("#");
+                               String ussdCode = "*151*1*1*0777224660" + Uri.encode("#");
 
                                 if (ActivityCompat.checkSelfPermission(getContext(),
                                         Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
