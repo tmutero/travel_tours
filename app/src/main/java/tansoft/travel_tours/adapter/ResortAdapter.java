@@ -69,7 +69,6 @@ public class ResortAdapter extends RecyclerView.Adapter<ResortAdapter.ResortProd
                 addProductFragment.setArguments(bundle);
                 activity.getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frag_container, addProductFragment).commit();
 
-
             }
         });
     }

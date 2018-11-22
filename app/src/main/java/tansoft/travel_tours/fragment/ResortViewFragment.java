@@ -1,12 +1,15 @@
 package tansoft.travel_tours.fragment;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -147,17 +150,26 @@ public class ResortViewFragment extends Fragment {
                         LinearLayout.LayoutParams.MATCH_PARENT);
 
 
-                alertDialog.setPositiveButton("Book",
+                alertDialog.setPositiveButton("Book Only",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
+
                                 booking(resortID,clientID);
-                                System.out.println("------------------------------"+resortID+"=======");
                             }
                         });
-                alertDialog.setNegativeButton("Cancel",
+                alertDialog.setNegativeButton("Payment",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
+                               String ussdCode = "*151*1*1*0774226217" + Uri.encode("#");
+
+                                if (ActivityCompat.checkSelfPermission(getContext(),
+                                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                    return;
+                                }
+                                startActivity(new Intent("android.intent.action.CALL", Uri.parse("tel:"+ussdCode)));
+
+
+
                             }
                         });
                 alertDialog.show();

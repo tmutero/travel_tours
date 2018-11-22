@@ -29,6 +29,7 @@ import java.util.Map;
 
 import tansoft.travel_tours.R;
 import tansoft.travel_tours.Utils.GpsTracker;
+import tansoft.travel_tours.adapter.BookingAdapter;
 import tansoft.travel_tours.adapter.RecomendedAdapter;
 import tansoft.travel_tours.config.AppConfig;
 import tansoft.travel_tours.config.AppController;
@@ -77,7 +78,7 @@ public class BookingFragment extends Fragment {
         if (rv != null) {
             rv.setHasFixedSize(true);
         }
-        mLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        mLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.GAP_HANDLING_LAZY);
         //mRecyclerView.setLayoutManager(mLayoutManager);
         rv.setLayoutManager(mLayoutManager);
 
@@ -107,7 +108,7 @@ public class BookingFragment extends Fragment {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Recomended Response: " + response);
+                Log.d(TAG, "Booked Response: " + response);
                 hideDialog();
 
                 try {
@@ -123,13 +124,12 @@ public class BookingFragment extends Fragment {
                                 resorts.getString( "serviceType" ),
                                 resorts.getString("dateCreated")
 
-
                         ));
 
 
                     }
-                    //sort(resortList);
-                    rv.setAdapter(new RecomendedAdapter(resortList, getContext()));
+
+                    rv.setAdapter(new BookingAdapter(resortList, getContext()));
 
                 } catch (JSONException e) {
                     // JSON error

@@ -1,5 +1,6 @@
 package tansoft.travel_tours.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,16 +18,17 @@ import java.util.List;
 import tansoft.travel_tours.R;
 import tansoft.travel_tours.config.AppConfig;
 import tansoft.travel_tours.domain.Resort;
+import tansoft.travel_tours.fragment.RecomendedFragment;
 import tansoft.travel_tours.fragment.ResortViewFragment;
 
 public class RecomendedAdapter   extends RecyclerView.Adapter<RecomendedAdapter.ResortProductViewHolder>{
 
     private List<Resort> resortList;
-    Context context;
+    RecomendedFragment activity;
 
-    public RecomendedAdapter(List<Resort> resortList, Context context) {
+    public RecomendedAdapter(List<Resort> resortList, RecomendedFragment activity) {
         this.resortList = resortList;
-        this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -46,7 +48,7 @@ public class RecomendedAdapter   extends RecyclerView.Adapter<RecomendedAdapter.
         holder.textDistance.setText(resortList.get(position).getDistance()+" :"+"KM from here.");
         holder.textPrice.setText("$"+" "+resortList.get(position).getAmount());
 
-        Glide.with(context)
+        Glide.with(activity)
                 .load(AppConfig.URL_IMAGE+resort.getImageString())
                 .into(holder.imageView);
 
@@ -54,7 +56,7 @@ public class RecomendedAdapter   extends RecyclerView.Adapter<RecomendedAdapter.
             @Override
             public void onClick(View v) {
 
-                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+//                AppCompatActivity activity = (AppCompatActivity) v.getContexttext();
                 Bundle bundle = new Bundle();
                 bundle.putString("resortName", resort.getName());
                 bundle.putDouble("latitude", resort.getLatitude());
@@ -66,7 +68,7 @@ public class RecomendedAdapter   extends RecyclerView.Adapter<RecomendedAdapter.
                 bundle.putString("resortID",resort.getId());
                 ResortViewFragment addProductFragment = new ResortViewFragment();
                 addProductFragment.setArguments(bundle);
-                activity.getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frag_container, addProductFragment).commit();
+                activity.getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.frag_container, addProductFragment).commit();
 
 
             }

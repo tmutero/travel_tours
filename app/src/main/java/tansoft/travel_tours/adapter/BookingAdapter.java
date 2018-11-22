@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
 import android.widget.TextView;
 
 import java.util.List;
@@ -39,7 +39,7 @@ private List<Resort> resortList;
 
         holder.resortName.setText(resortList.get(position).getName());
         holder.serviceType.setText(resortList.get(position).getServiceType());
-    //    holder.dateCreated.setText(resortList.get(position).getDateCreated());
+        holder.dateCreated.setText(resortList.get(position).getDateCreated());
 
 
     }
@@ -59,7 +59,7 @@ private List<Resort> resortList;
 
             resortName=view.findViewById(R.id.resortName);
             serviceType = view.findViewById(R.id.serviceType);
-         //   dateCreated=view.findViewById(R.id.dateCreated);
+         //dateCreated=view.findViewById(R.id.dateCreated);
         }
     }
 }

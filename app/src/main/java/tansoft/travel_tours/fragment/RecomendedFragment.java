@@ -183,7 +183,7 @@ public class RecomendedFragment extends Fragment {
 
                     }
                    // sort(resortList);
-                    rv.setAdapter(new RecomendedAdapter(resortList, getContext()));
+                    rv.setAdapter(new RecomendedAdapter(resortList, RecomendedFragment.this));
 
                 } catch (JSONException e) {
                     // JSON error
