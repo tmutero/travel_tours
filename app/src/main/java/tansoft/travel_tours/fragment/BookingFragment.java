@@ -31,6 +31,7 @@ import tansoft.travel_tours.R;
 import tansoft.travel_tours.Utils.GpsTracker;
 import tansoft.travel_tours.adapter.BookingAdapter;
 import tansoft.travel_tours.adapter.RecomendedAdapter;
+import tansoft.travel_tours.adapter.ResortAdapter;
 import tansoft.travel_tours.config.AppConfig;
 import tansoft.travel_tours.config.AppController;
 import tansoft.travel_tours.domain.Resort;
@@ -78,11 +79,14 @@ public class BookingFragment extends Fragment {
         if (rv != null) {
             rv.setHasFixedSize(true);
         }
-        mLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.GAP_HANDLING_LAZY);
+        mLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
         //mRecyclerView.setLayoutManager(mLayoutManager);
         rv.setLayoutManager(mLayoutManager);
 
         resortList = new ArrayList<>();
+
+
+
         getBooked();
         return root;
     }

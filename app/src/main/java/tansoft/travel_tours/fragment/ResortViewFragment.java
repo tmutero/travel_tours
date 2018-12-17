@@ -3,7 +3,6 @@ package tansoft.travel_tours.fragment;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,13 +10,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,7 +26,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,18 +33,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import tansoft.travel_tours.R;
-import tansoft.travel_tours.activity.LoginActivity;
-import tansoft.travel_tours.activity.MainActivity;
-import tansoft.travel_tours.activity.preference.SettingsActivity;
-import tansoft.travel_tours.adapter.ResortAdapter;
 import tansoft.travel_tours.config.AppConfig;
 import tansoft.travel_tours.config.AppController;
-import tansoft.travel_tours.domain.Resort;
 import tansoft.travel_tours.services.SQLiteHandler;
 import tansoft.travel_tours.services.SessionManager;
 
 import static com.android.volley.VolleyLog.TAG;
-import static java.util.Collections.sort;
 
 
 public class ResortViewFragment extends Fragment {

@@ -183,6 +183,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("resort_location"));
             bindPreferenceSummaryToValue(findPreference("city_list"));
             bindPreferenceSummaryToValue(findPreference("service_type"));
+            bindPreferenceSummaryToValue(findPreference("amount"));
         }
 
         @Override

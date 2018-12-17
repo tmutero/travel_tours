@@ -13,6 +13,7 @@ import java.util.List;
 
 import tansoft.travel_tours.R;
 import tansoft.travel_tours.domain.Resort;
+import tansoft.travel_tours.fragment.BookingFragment;
 
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingViewHolder>{
 
